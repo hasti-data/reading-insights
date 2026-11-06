@@ -20,19 +20,19 @@ st.set_page_config(
 # THEMES
 # ==================================================
 THEMES = {
-    "☁️ Daydream": {
-        "bg": "#F4F8FA",
-        "sidebar": "#E7F0F3",
+    "🌸 Pastel Garden": {
+        "bg": "#FFF5F7",
+        "sidebar": "#FCE8EE",
         "panel": "#FFFFFF",
-        "ink": "#263746",
-        "muted": "#718493",
-        "primary": "#79B9D2",
-        "secondary": "#91BFAE",
-        "accent": "#D6B6D9",
-        "gold": "#E4C77B",
-        "border": "#DCE7EB",
-        "grid": "#EAF0F3",
-        "button_text": "#183746",
+        "ink": "#49313D",
+        "muted": "#765E6B",
+        "primary": "#D982A3",
+        "secondary": "#79A98D",
+        "accent": "#E8B7C9",
+        "gold": "#C69B61",
+        "border": "#EBD5DE",
+        "grid": "#F3E4E9",
+        "button_text": "#382631",
     },
     "🌙 Midnight Bunny": {
         "bg": "#111A2B",
@@ -329,16 +329,11 @@ with st.sidebar:
     st.markdown(
         """
 
-        <div style="font-size:1.8rem;font-weight:800;letter-spacing:-1px;">
-
-            reader<span style="color:#83CFF0;">.</span>
-
+        <div class="reader-brand">
+            reader<span class="reader-brand-dot">.</span>
         </div>
-
-        <div style="font-size:0.78rem;letter-spacing:1px;opacity:0.8;">
-
+        <div class="reader-tagline">
             YOUR PERSONAL READING UNIVERSE
-
         </div>
 
         """,
@@ -371,6 +366,59 @@ with st.sidebar:
     st.caption("Charts are calculated from your supplied data.")
 
 apply_custom_styles(C, theme_name)
+
+# Final theme overrides: keep pastel surfaces while preserving readable contrast.
+st.markdown(
+    f"""
+    <style>
+    .reader-brand {{
+        color: {C["ink"]};
+        font-size: 1.8rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+        line-height: 1.2;
+    }}
+    .reader-brand-dot {{
+        color: {C["primary"]};
+    }}
+    .reader-tagline {{
+        color: {C["muted"]};
+        font-size: 0.78rem;
+        letter-spacing: 1px;
+        margin-top: 4px;
+    }}
+    .stApp {{
+        background-color: {C["bg"]};
+        color: {C["ink"]};
+    }}
+    [data-testid="stSidebar"] {{
+        background-color: {C["sidebar"]};
+    }}
+    .panel, .metric-card {{
+        background: {C["panel"]} !important;
+        border: 1px solid {C["border"]} !important;
+        color: {C["ink"]} !important;
+    }}
+    .metric-label, .metric-value, .metric-note, .book-title {{
+        color: {C["ink"]} !important;
+    }}
+    .stMarkdown, .stMarkdown p, .stMarkdown li,
+    .stMarkdown label, .stText, [data-testid="stCaptionContainer"] {{
+        color: {C["ink"]};
+    }}
+    [data-testid="stDataFrame"], [data-testid="stTable"] {{
+        color: {C["ink"]};
+    }}
+    div[data-baseweb="select"] > div,
+    div[data-baseweb="input"] > div,
+    div[data-baseweb="textarea"] > div {{
+        background-color: {C["panel"]};
+        border-color: {C["border"]};
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 # ==================================================
 # HEADER
